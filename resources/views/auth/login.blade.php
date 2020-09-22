@@ -6,7 +6,7 @@
 		<div class="card-group">
 			<div class="card p-4">
 				<div class="card-body">
-					<x-form.post>
+					<x-form.post :action="route('login')">
                         <h1>Login</h1>
                         <p class="text-muted">Sign In to your account</p>
                         <div class="input-group mb-3">
