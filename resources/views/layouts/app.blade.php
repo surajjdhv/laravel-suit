@@ -20,6 +20,7 @@
 					<div class="container-fluid">
 						<div class="fade-in">
 
+                            @include('includes.messages')
                             @yield('content')
 
 						</div>
