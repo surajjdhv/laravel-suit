@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth'], function () {
     Route::view('/', 'dashboard')->name('index');
+
+    Route::group([
+        'prefix' => 'user',
+        'as' => 'user.'
+    ], function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+    });
 });
