@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,11 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'user.'
     ], function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
+
+        Route::get('create', [UserController::class, 'create'])->name('create');
+
+        Route::put('/', [UserController::class, 'store'])->name('store');
+
+        Route::get('{user}', [UserController::class, 'show'])->name('show');
     });
 });
