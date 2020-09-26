@@ -26,14 +26,11 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->is_active = $request->is_active;
-
-        if ($request->password) {
-            $user->password = bcrypt($request->password);
-        }
+        $user = User::create(array_merge([
+            'name' => $request->name,
+            'email' => $request->email,
+            'is_active' => $request->is_active
+        ], $request->password ? ['password' => bcrypt($request->password)] : []));
 
         $user->save();
 
@@ -47,15 +44,11 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->is_active = $request->is_active;
-
-        if ($request->password) {
-            $user->password = bcrypt($request->password);
-        }
-
-        $user->save();
+        $user->update(array_merge([
+            'name' => $request->name,
+            'email' => $request->email,
+            'is_active' => $request->is_active
+        ], $request->password ? ['password' => bcrypt($request->password)] : []));
 
         return redirect()->route('user.show', $user);
     }
