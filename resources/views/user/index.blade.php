@@ -15,7 +15,7 @@
         />
     </x-slot>
     <x-slot name="body">
-        <table class="table table-bordered table-responsive-sm">
+        <table class="table table-striped table-responsive-sm">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -29,22 +29,25 @@
                     <tr>
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
-                        <td>{!! $user->status ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Deactivated</span>' !!}</td>
+                        <td>{!! $user->is_active ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Deactivated</span>' !!}</td>
                         <td>
-                            <a class="btn btn-ghost-primary" title="View" href="{{ route('user.show', $user->id) }}">
+                            <a class="btn btn-sm btn-ghost-primary" title="View" href="{{ route('user.show', $user->id) }}">
                                 <svg class="c-icon">
                                     <use xlink:href="{{ asset('icons/free.svg#cil-lightbulb') }}"></use>
                                 </svg>
+                                View
                             </a>
-                            <a class="btn btn-ghost-info" title="Edit">
+                            <a class="btn btn-sm btn-ghost-info" title="Edit" href="{{ route('user.edit', $user->id) }}">
                                 <svg class="c-icon">
                                     <use xlink:href="{{ asset('icons/free.svg#cil-pencil') }}"></use>
                                 </svg>
+                                Edit
                             </a>
-                            <a class="btn btn-ghost-danger" title="Delete">
+                            <a class="btn btn-sm btn-ghost-danger" title="Delete" href="#">
                                 <svg class="c-icon">
                                     <use xlink:href="{{ asset('icons/free.svg#cil-trash') }}"></use>
                                 </svg>
+                                Delete
                             </a>
                         </td>
                     </tr>

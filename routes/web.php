@@ -28,6 +28,11 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::put('/', [UserController::class, 'store'])->name('store');
 
-        Route::get('{user}', [UserController::class, 'show'])->name('show');
+        Route::prefix('{user}')->group(function() {
+            Route::get('/', [UserController::class, 'show'])->name('show');
+            Route::get('edit', [UserController::class, 'edit'])->name('edit');
+            Route::patch('/', [UserController::class, 'update'])->name('update');
+        });
+
     });
 });

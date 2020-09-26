@@ -17,7 +17,7 @@
                </tr>
                <tr>
                   <th>Status</th>
-                  <td>{!! $user->status ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Deactivated</span>' !!}</td>
+                  <td>{!! $user->is_active ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Deactivated</span>' !!}</td>
                </tr>
                <tr>
                   <th>Email</th>
