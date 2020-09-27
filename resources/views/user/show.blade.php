@@ -31,9 +31,9 @@
             <strong>@lang('User Created'):</strong> {{ $user->created_at }} ({{ $user->created_at->diffForHumans() }}),
             <strong>@lang('Last Updated'):</strong> {{ $user->updated_at }} ({{ $user->updated_at->diffForHumans() }})
 
-            {{-- @if($user->trashed())
-                <strong>@lang('Account Deleted'):</strong> @displayDate($user->deleted_at) ({{ $user->deleted_at->diffForHumans() }})
-            @endif --}}
+            @if($user->trashed())
+                <strong>User Deleted</strong> {{ $user->deleted_at }} ({{ $user->deleted_at->diffForHumans() }})
+            @endif
         </small>
     </x-slot>
 </x-card>

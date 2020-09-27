@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('breadcrumb-links')
+    <x-utils.link class="c-subheader-nav-link" :href="route('user.deleted.index')" text="Deleted Users" />
+@endsection
+
 @section('content')
 <x-card>
     <x-slot name="header">
@@ -15,6 +19,21 @@
         />
     </x-slot>
     <x-slot name="body">
+        <div>
+            <x-form.post action="#">
+                <div class="input-group mb-3">
+                    <input type="text" name="search" class="form-control">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">
+                            <svg class="c-icon">
+                                <use xlink:href="{{ asset('icons/free.svg#cil-magnifying-glass') }}"></use>
+                            </svg>
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </x-form.post>
+        </div>
         <table class="table table-striped table-responsive-sm">
             <thead>
                 <tr>
@@ -43,12 +62,14 @@
                                 </svg>
                                 Edit
                             </a>
-                            <a class="btn btn-sm btn-ghost-danger" title="Delete" href="#">
-                                <svg class="c-icon">
-                                    <use xlink:href="{{ asset('icons/free.svg#cil-trash') }}"></use>
-                                </svg>
+                            <x-utils.form-button
+                                buttonClass="btn btn-sm btn-ghost-danger"
+                                icon="cil-trash"
+                                :action="route('user.delete', $user->id)"
+                                method="DELETE"
+                            >
                                 Delete
-                            </a>
+                            </x-utils.form-button>
                         </td>
                     </tr>
                 @endforeach

@@ -29,7 +29,7 @@ class UserController extends Controller
         $user = User::create(array_merge([
             'name' => $request->name,
             'email' => $request->email,
-            'is_active' => $request->is_active
+            'is_active' => $request->is_active ?? 0
         ], $request->password ? ['password' => bcrypt($request->password)] : []));
 
         $user->save();
@@ -44,12 +44,20 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
+        // dd($request->is_active ?? 0);
         $user->update(array_merge([
             'name' => $request->name,
             'email' => $request->email,
-            'is_active' => $request->is_active
+            'is_active' => $request->is_active ?? 0
         ], $request->password ? ['password' => bcrypt($request->password)] : []));
 
         return redirect()->route('user.show', $user);
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+
+        return redirect()->route('user.index');
     }
 }

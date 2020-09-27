@@ -46,7 +46,7 @@
             </div>
         </li>
     </ul>
-    <div class="c-subheader px-3">
+    <div class="c-subheader justify-content-between px-3">
         <!-- Breadcrumb-->
         <ol class="breadcrumb border-0 m-0">
             <li class="breadcrumb-item">Home</li>
@@ -54,5 +54,9 @@
             <li class="breadcrumb-item active">Dashboard</li>
             <!-- Breadcrumb Menu-->
         </ol>
+
+        <div class="c-subheader-nav mfe-2">
+            @yield('breadcrumb-links')
+        </div>
     </div>
 </header>

@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserRequest extends FormRequest
@@ -24,10 +23,10 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-    // dump($this->request->get('id'));
         return [
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'email', 'unique:users,email,' . $this->user->id],
+            'is_active' => ['nullable', 'boolean'],
             'password' => ['nullable', 'confirmed']
         ];
     }
