@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="sendPassword" class="col-md-2 col-form-label">Send Password Through Email</label>
+                    <label for="sendPassword" class="col-md-2 col-form-label">Send Password Email</label>
 
                     <div class="col-md-10">
                         <div class="form-check">

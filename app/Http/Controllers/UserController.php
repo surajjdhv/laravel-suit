@@ -2,15 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Models\User;
+use App\Http\Queries\Filters\FuzzyFilter;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = QueryBuilder::for(User::class)
+            ->allowedFilters(
+                AllowedFilter::custom('search', new FuzzyFilter(
+                    'name',
+                    'email',
+                ))
+            )
+            ->get();
+
         return view('user.index')->withUsers($users);
     }
 

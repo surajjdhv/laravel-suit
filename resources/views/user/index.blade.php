@@ -20,19 +20,35 @@
     </x-slot>
     <x-slot name="body">
         <div>
-            <x-form.post action="#">
-                <div class="input-group mb-3">
-                    <input type="text" name="search" class="form-control">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">
-                            <svg class="c-icon">
-                                <use xlink:href="{{ asset('icons/free.svg#cil-magnifying-glass') }}"></use>
-                            </svg>
-                            Search
-                        </button>
+            <x-form.get :action="route('user.index')">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sortBy">Sort by: </label>
+                            <select name="sortBy" class="form-control d-inline-block w-auto">
+                                <option value="id">ID</option>
+                                <option value="name">Name</option>
+                            </select>
+                            <select name="sortAs" class="form-control d-inline-block w-auto">
+                                <option value="">ASC</option>
+                                <option value="-">DESC</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <input type="text" name="search" value="{{ request()->query('search') }}" class="form-control">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-secondary">
+                                    <svg class="c-icon">
+                                        <use xlink:href="{{ asset('icons/free.svg#cil-magnifying-glass') }}"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </x-form.post>
+            </x-form.get>
         </div>
         <table class="table table-striped table-responsive-sm">
             <thead>
@@ -44,7 +60,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @forelse ($users as $user)
                     <tr>
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
@@ -72,7 +88,11 @@
                             </x-utils.form-button>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="4" class="text-center">No Users Found</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </x-slot>
