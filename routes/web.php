@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Tabuna\Breadcrumbs\Trail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DeletedUserController;
@@ -17,13 +18,22 @@ use App\Http\Controllers\DeletedUserController;
 */
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::view('/', 'dashboard')->name('index');
+    Route::view('/', 'dashboard')
+        ->name('index')
+        ->breadcrumbs(function (Trail $trail) {
+            $trail->push('Home', route('index'));
+        });
 
     Route::group([
         'prefix' => 'user',
         'as' => 'user.'
     ], function () {
-        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/', [UserController::class, 'index'])
+            ->name('index')
+            ->breadcrumbs(function (Trail $trail) {
+                $trail->parent('user.index')
+                    ->push('User Management', route('user.index'));
+            });
 
         Route::get('create', [UserController::class, 'create'])->name('create');
 

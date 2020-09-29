@@ -21,25 +21,12 @@
     <x-slot name="body">
         <div>
             <x-form.get :action="route('user.index')">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="sortBy">Sort by: </label>
-                            <select name="sortBy" class="form-control d-inline-block w-auto">
-                                <option value="id">ID</option>
-                                <option value="name">Name</option>
-                            </select>
-                            <select name="sortAs" class="form-control d-inline-block w-auto">
-                                <option value="">ASC</option>
-                                <option value="-">DESC</option>
-                            </select>
-                        </div>
-                    </div>
+                <div class="row justify-content-end">
                     <div class="col-md-6">
                         <div class="input-group mb-3">
                             <input type="text" name="search" value="{{ request()->query('search') }}" class="form-control">
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-secondary">
+                                <button type="submit" class="btn btn-sm btn-secondary">
                                     <svg class="c-icon">
                                         <use xlink:href="{{ asset('icons/free.svg#cil-magnifying-glass') }}"></use>
                                     </svg>
@@ -95,6 +82,8 @@
                 @endforelse
             </tbody>
         </table>
+
+        {{ $users->links() }}
     </x-slot>
 </x-card>
 @endsection

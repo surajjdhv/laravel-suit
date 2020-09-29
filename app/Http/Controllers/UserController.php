@@ -20,7 +20,8 @@ class UserController extends Controller
                     'email',
                 ))
             )
-            ->get();
+            ->paginate(7)
+            ->appends(request()->query());
 
         return view('user.index')->withUsers($users);
     }
