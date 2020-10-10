@@ -24,7 +24,7 @@
                 <div class="row justify-content-end">
                     <div class="col-md-6">
                         <div class="input-group mb-3">
-                            <input type="text" name="search" value="{{ request()->query('search') }}" class="form-control">
+                            <input type="text" name="q" value="{{ request()->query('q') }}" class="form-control">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-sm btn-secondary">
                                     <svg class="c-icon">

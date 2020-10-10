@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use Tabuna\Breadcrumbs\Trail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -31,11 +30,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', [UserController::class, 'index'])
             ->name('index')
             ->breadcrumbs(function (Trail $trail) {
-                $trail->parent('user.index')
+                $trail->parent('index')
                     ->push('User Management', route('user.index'));
             });
 
-        Route::get('create', [UserController::class, 'create'])->name('create');
+        Route::get('create', [UserController::class, 'create'])
+            ->name('create')
+            ->breadcrumbs(function (Trail $trail) {
+                $trail->parent('user.index')
+                    ->push('Create User', route('user.create'));
+            });;
 
         Route::put('/', [UserController::class, 'store'])->name('store');
 

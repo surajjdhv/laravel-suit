@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         $users = QueryBuilder::for(User::class)
             ->allowedFilters(
-                AllowedFilter::custom('search', new FuzzyFilter(
+                AllowedFilter::custom('q', new FuzzyFilter(
                     'name',
                     'email',
                 ))
@@ -56,7 +56,6 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        // dd($request->is_active ?? 0);
         $user->update(array_merge([
             'name' => $request->name,
             'email' => $request->email,
