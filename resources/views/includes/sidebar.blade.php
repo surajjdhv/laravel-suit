@@ -17,7 +17,7 @@
 			</a>
         </li>
         <li class="c-sidebar-nav-title">Components</li>
-        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown {{ activeClass(Route::is('user.*'), 'c-open c-show') }}">
             <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
                 <svg class="c-sidebar-nav-icon">
                     <use xlink:href="{{ asset('icons/free.svg#cil-user') }}"></use>
@@ -26,17 +26,17 @@
             </a>
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('user.index') }}">
-                    <span class="c-sidebar-nav-icon"></span>
-                    User Management
+                    <a class="c-sidebar-nav-link" href="{{ route('user.index') }}" {{ activeClass(Route::is('user.*', 'c-active')) }}>
+                        <span class="c-sidebar-nav-icon"></span>
+                        User Management
                     </a>
                 </li>
             </ul>
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link" href="base/breadcrumb.html">
-                    <span class="c-sidebar-nav-icon"></span>
-                    Role Management
+                        <span class="c-sidebar-nav-icon"></span>
+                        Role Management
                     </a>
                 </li>
             </ul>
