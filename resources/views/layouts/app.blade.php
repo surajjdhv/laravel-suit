@@ -31,10 +31,10 @@
 			</div>
 		</div>
 
-        @stack('before-script')
+        @stack('before-scripts')
 
         <script src="{{ mix('js/app.js') }}"></script>
 
-        @stack('after-script')
+        @stack('after-scripts')
 	</body>
 </html>

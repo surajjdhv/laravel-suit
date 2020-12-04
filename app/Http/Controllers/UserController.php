@@ -15,12 +15,12 @@ class UserController extends Controller
     {
         $users = QueryBuilder::for(User::class)
             ->allowedFilters(
-                AllowedFilter::custom('q', new FuzzyFilter(
+                AllowedFilter::custom('search', new FuzzyFilter(
                     'name',
                     'email',
                 ))
             )
-            ->paginate(7)
+            ->paginate(request()->query('size') ?? 10)
             ->appends(request()->query());
 
         return view('user.index')->withUsers($users);
