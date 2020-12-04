@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Tabuna\Breadcrumbs\Trail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -52,8 +53,20 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::prefix('{user}')->group(function() {
-            Route::get('/', [UserController::class, 'show'])->name('show');
-            Route::get('edit', [UserController::class, 'edit'])->name('edit');
+            Route::get('/', [UserController::class, 'show'])
+                ->name('show')
+                ->breadcrumbs(function (Trail $trail, User $user) {
+                    $trail->parent('user.index')
+                        ->push($user->name, route('user.show', $user));
+                });
+
+            Route::get('edit', [UserController::class, 'edit'])
+                ->name('edit')
+                ->breadcrumbs(function (Trail $trail, User $user) {
+                    $trail->parent('user.show', $user)
+                        ->push('Edit', route('user.edit', $user));
+                });
+
             Route::patch('/', [UserController::class, 'update'])->name('update');
             Route::delete('/', [UserController::class, 'destroy'])->name('delete');
         });

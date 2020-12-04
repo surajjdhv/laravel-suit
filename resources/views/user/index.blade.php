@@ -34,7 +34,9 @@
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
-                            <td>{!! $user->is_active ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Deactivated</span>' !!}</td>
+                            <td>{!! $user->is_active
+                                        ? '<span class="badge badge-success">Active</span>'
+                                        : '<span class="badge badge-danger">Deactivated</span>' !!}</td>
                             <td>
                                 <a class="btn btn-sm btn-ghost-primary" title="View" href="{{ route('user.show', $user->id) }}">
                                     <svg class="c-icon">

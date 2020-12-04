@@ -62,7 +62,7 @@
             </div>
         </x-slot>
         <x-slot name="footer">
-            <button class="btn btn-sm btn-primary float-right" type="submit">Create User</button>
+            <button class="btn btn-sm btn-primary float-right" type="submit">Edit User</button>
         </x-slot>
     </x-card>
 </x-form.patch>
