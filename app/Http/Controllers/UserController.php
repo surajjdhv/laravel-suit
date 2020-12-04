@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use Log;
+use Exception;
 use App\Models\User;
+use App\Events\UserCreatedEvent;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use App\Http\Requests\StoreUserRequest;
@@ -38,15 +42,25 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        $user = User::create(array_merge([
-            'name' => $request->name,
-            'email' => $request->email,
-            'is_active' => $request->is_active ?? 0
-        ], $request->password ? ['password' => bcrypt($request->password)] : []));
+        DB::beginTransaction();
 
-        $user->save();
+        try {
+            /** @var User */
+            $user = User::create(array_merge([
+                'name' => $request->name,
+                'email' => $request->email,
+                'is_active' => $request->is_active ?? 0
+            ], $request->password ? ['password' => bcrypt($request->password)] : []));
 
-        return redirect()->route('user.show', $user);
+            DB::commit();
+
+            event(new UserCreatedEvent($user));
+
+            return redirect()->route('user.show', $user);
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+        }
     }
 
     public function edit(User $user)
